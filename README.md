@@ -615,6 +615,132 @@ my_tuple: ('hola', 'hola', 1, 2)
 my_set2: set(my_tuple)
 print(my_set2) #Output {'hola', 1}
 ```
+## Operaciones con sets
+
+El código
+
+```
+def union(set_one, set_two):
+	# Combinacion de sets
+    return set_one | set_two 
 
 
+def interseccion(set_one, set_two):
+	# Interseccion; el resultado de combinar ambos sets, pero solo nos quedamos 
+	# con los elementos en comun.
+    return set_one & set_two
+
+
+def diferencias(set_one, set_two):
+	# Diferencia; el resultado de tomar dos sets, y remover todo lo que contenga  
+	# el segundo set, se arrojan todos los datos del primer set sin los repetidos 
+	# con el segundo.
+    return set_one - set_two
+
+
+def diferencia_simetrica(set_one, set_two):
+	# Diferencia simetrica; es lo contrario de la interseccion, excepto lo que se  
+	# comparte.
+    return set_one ^ set_two
+
+
+def main():
+    set_one = {1,2,3}
+    set_two = {4,2,5,6}
+    print()
+    print("Union:                ", union(set_one, set_two))
+    print("Diferencias:          ", diferencias(set_one, set_two))
+    print("Diferencia simetrica: ", diferencia_simetrica(set_one, set_two))
+    print("Interseccion:         ", interseccion(set_one, set_two))
+
+    
+if __name__ == '__main__':
+    main()
+
+```
+
+es mas largo, pero se lee perfectamente.
+
+
+## Manejo de fechas
+
+#### Manejo de fechas
+
+`datetime`  es un módulo de manejo de fechas.
+
+```python
+import datetime
+
+my_time = datetime.datetime.now() # hora local de mi PC u hora universal
+my_date = datetime.date.today() # fecha actual
+
+my_day = datetime.date.today()
+
+print(my_time)
+print(my_date)
+
+print(f'Year: {my_day.year}')
+print(f'Month: {my_day.month}')
+print(f'Day: {my_day.day}')
+
+```
+
+Tabla de códigos de formato para fechas y horas(los más importantes):
+
+Formato
+
+|Format| Date |
+|--|--|
+| %Y |   Year |
+| %m |   Month |
+| %d |   Day |
+| %H |   Hour |
+| %M |   Minute |
+| %S|   Second |
+
+
+
+
+```python
+from datetime import datetime
+
+my_datetime = datetime.now()
+print(my_datetime)
+
+latam = my_datetime.strftime('%d/%m/%Y')
+print(f'Formato LATAM: {latam}')
+
+usa = my_datetime.strftime('%m/%d/%Y')
+print(f'Formato USA: {usa}')
+
+random_format = my_datetime.strftime('año %Y mes %m día %d')
+print(f'Formato random: {random_format}')
+
+formato_utc = datetime.utcnow()
+print(f'Formato UTC: {formato_utc}')
+```
+## Time zones
+
+instalar modulo para trabajar con zona horarias
+
+    pip install pytz
+
+codigo 
+```python
+	from datetime import datetime
+	import pytz
+
+	def time_zone(zone):
+		bogota_timezone = pytz.timezone(zone)
+		bogota_date = datetime.now(bogota_timezone)
+		return(zone, bogota_date.strftime('%d/%m/%Y , %H:%M:%S'))
+
+	my_zone = ('America/Bogota','America/Mexico_City','America/Caracas','Europe/Lisbon','Europe/Berlin')
+
+	res = [time_zone(zone) for zone in my_zone]
+	print(res)
+
+```
+
+fin del curso de python avazando 
 
